@@ -46,6 +46,9 @@ from datafun_streaming.kafka.kafka_consumer_utils import (
 )
 from datafun_streaming.kafka.kafka_settings import KafkaSettings
 from datafun_streaming.stats.stats_utils import RunningStats
+from datafun_streaming.data_validation.validation_utils import (
+    validate_required_fields,
+)
 from datafun_toolkit.logger import get_logger, log_header, log_path
 from dotenv import load_dotenv
 
@@ -54,6 +57,7 @@ from streaming.data_engineering.derived_fields_blessing import enrich_message
 from streaming.data_validation.data_contract_blessing import (
     CONSUMED_FIELDNAMES,
     REJECTED_SALES_FIELDNAMES,
+    SALES_REQUIRED_FIELDS,
     validate_sale_record,
 )
 from streaming.storage.storage_blessing import (

@@ -23,24 +23,58 @@ to get these projects running on your machine.
 
 ### Dataset
 
-The dataset used by the Kafka producer is `sales.csv`. It contains sales transaction records with fields such as order ID, datetime, region ID, product ID, unit price, quantity, customer information, payment method, and referral source. I used the original sales dataset.
+The dataset used by the Kafka producer is `sales.csv`.
+It contains sales transaction records with fields such as
+order ID, datetime, region ID, product ID, unit price,
+quantity, customer information, payment method,
+and referral source.
+I used the original sales dataset.
 
 ### Kafka Messages
 
-The producer sends sales transaction records to the Kafka topic `product-sales-case`. Each message uses the region ID as the Kafka message key. I modified the producer to log region information for each message sent.
+The producer sends sales transaction records to the Kafka topic
+`product-sales-case`.
+Each message uses the region ID as the Kafka message key.
+I modified the producer to log region information for each
+message sent.
 
 ### Consumer Processing
 
-The consumer receives sales messages from Kafka, validates them, calculates derived fields such as subtotal, tax amount, and total sales, and stores processed records in CSV and DuckDB. I modified the consumer to track and report the number of online sales processed.
+The consumer receives sales messages from Kafka, validates them,
+calculates derived fields such as subtotal, tax amount,
+and total sales, and stores processed records in CSV and DuckDB.
+I modified the consumer to track and report the number of
+online sales processed.
 
 ### Experiments
 
-I customized several project files by adding an online sales counter to the consumer, region logging to the producer, Kafka topic counting to the admin file, and DuckDB storage summaries that report valid records, rejected records, total records stored, and sales by region. I also created custom visualization, validation, data contract, and derived field modules to extend the original Kafka streaming workflow with additional analytics and reporting.
+I customized several project files by adding an online sales
+counter to the consumer, region logging to the producer,
+Kafka topic counting to the admin file, and DuckDB storage
+summaries that report valid records, rejected records,
+total records stored, and sales by region.
+
+I also created custom visualization, validation,
+data contract, and derived field modules to extend the
+original Kafka streaming workflow with additional analytics
+and reporting.
 
 ### Results
 
-The producer successfully sent messages to Kafka, and the consumer processed all messages successfully. Additional reporting was generated, including online sales counts, topic counts, and DuckDB storage summaries.
+The producer successfully sent messages to Kafka, and the
+consumer processed all messages successfully.
+
+Additional reporting was generated, including online sales
+counts, topic counts, and DuckDB storage summaries.
 
 ### Interpretation
 
-This project demonstrated how Kafka supports real-time data streaming between producers and consumers. My modifications added more visibility into the streaming process through enhanced logging and analytics. The consumed messages provided useful business intelligence, including online sales activity and regional sales information.
+This project demonstrated how Kafka supports real-time
+data streaming between producers and consumers.
+
+My modifications added more visibility into the streaming
+process through enhanced logging and analytics.
+
+The consumed messages provided useful business intelligence,
+including online sales activity and regional sales
+information.

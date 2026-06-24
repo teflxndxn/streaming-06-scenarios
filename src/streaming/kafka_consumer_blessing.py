@@ -33,6 +33,9 @@ from pathlib import Path
 from typing import Any, Final
 
 from confluent_kafka.cimpl import OFFSET_BEGINNING, TopicPartition
+from datafun_streaming.data_validation.validation_utils import (
+    validate_required_fields,
+)
 from datafun_streaming.io.io_utils import append_csv_row, read_csv_as_lookup
 from datafun_streaming.kafka.kafka_admin_utils import (
     create_admin_client,
@@ -46,9 +49,6 @@ from datafun_streaming.kafka.kafka_consumer_utils import (
 )
 from datafun_streaming.kafka.kafka_settings import KafkaSettings
 from datafun_streaming.stats.stats_utils import RunningStats
-from datafun_streaming.data_validation.validation_utils import (
-    validate_required_fields,
-)
 from datafun_toolkit.logger import get_logger, log_header, log_path
 from dotenv import load_dotenv
 
@@ -56,14 +56,12 @@ from streaming.core.utils import log_env_vars
 from streaming.data_engineering.derived_fields_blessing import enrich_message
 from streaming.data_validation.data_contract_blessing import (
     CONSUMED_FIELDNAMES,
-    REJECTED_SALES_FIELDNAMES,
     SALES_REQUIRED_FIELDS,
-    validate_sale_record,
 )
 from streaming.storage.storage_blessing import (
     init_db,
-    write_valid_record,
     log_storage_summary,
+    write_valid_record,
 )
 from streaming.visualizations.live_visualizations_blessing import (
     close_live_chart,
@@ -378,9 +376,8 @@ def consume_messages(
             LOG.warning(f"skipped={skipped_count}")
             continue
 
-
         if str(enriched.get("is_online", "")).lower() == "true":
-         online_sales_count += 1
+            online_sales_count += 1
 
         # Write the valid record to the DuckDB database
         # using the helper function.
@@ -407,7 +404,6 @@ def consume_messages(
         LOG.info(f"Online sales processed: {online_sales_count}")
 
     return consumed_count, skipped_count
-
 
 
 def save_artifacts(figure: Any) -> None:

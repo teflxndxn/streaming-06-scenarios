@@ -110,12 +110,13 @@ def enrich_message(
     total = round(total_price + tax_amount, 2)
     discounted_total = round(total * 0.95, 2)
     return {
-    **row,
-    "subtotal": total_price,
-    "tax_amount": tax_amount,
-    "total": total,
-    "discounted_total": discounted_total,
-}
+        **row,
+        "subtotal": total_price,
+        "tax_amount": tax_amount,
+        "total": total,
+        "discounted_total": discounted_total,
+    }
+
 
 def get_tax_rate(region_id: str, region_lookup: dict[str, float]) -> float:
     """Look up the tax rate for a region.
